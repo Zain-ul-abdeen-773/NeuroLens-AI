@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════
+   NeuroLens Design System — Cyberpunk Glassmorphism
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --neon-blue: #00d4ff;
+  --neon-purple: #b44aff;
+  --neon-pink: #ff2d95;
+  --neon-green: #00ff88;
+  --bg-primary: #0a0a1a;
+  --bg-secondary: #0d0d2b;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: #e0e0ff;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-blue), var(--neon-purple));
+  border-radius: 3px;
+}
+
+/* ── Glass Card ─────────────────────────────────────────────────── */
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border;
+    background: rgba(13, 13, 43, 0.6);
+    border-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+  .glass-card-hover:hover {
+    border-color: rgba(0, 212, 255, 0.2);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 20px rgba(0, 212, 255, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .neon-border {
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 
+      0 0 10px rgba(0, 212, 255, 0.1),
+      inset 0 0 10px rgba(0, 212, 255, 0.05);
+  }
+
+  .neon-text {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  }
+
+  /* ── Cyber Grid Background ──────────────────────────────────── */
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── Glow Effects ───────────────────────────────────────────── */
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 60px rgba(0, 212, 255, 0.1);
+  }
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(180, 74, 255, 0.3), 0 0 60px rgba(180, 74, 255, 0.1);
+  }
+  .glow-pink {
+    box-shadow: 0 0 20px rgba(255, 45, 149, 0.3);
+  }
+
+  /* ── Scan Line Animation ────────────────────────────────────── */
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    animation: scan 3s linear infinite;
+    opacity: 0.5;
+  }
+
+  /* ── Input Styling ──────────────────────────────────────────── */
+  .neuro-input {
+    @apply w-full bg-transparent border rounded-xl px-4 py-3 text-white placeholder-gray-500 outline-none transition-all duration-300;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  .neuro-input:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+  }
+
+  /* ── Button Styling ─────────────────────────────────────────── */
+  .neuro-btn {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(180, 74, 255, 0.2));
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: var(--neon-blue);
+  }
+  .neuro-btn:hover {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(180, 74, 255, 0.3));
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    transform: translateY(-1px);
+  }
+  .neuro-btn:active {
+    transform: translateY(0);
+  }
+  .neuro-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .neuro-btn-primary {
+    @apply neuro-btn;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    color: white;
+    border: none;
+  }
+  .neuro-btn-primary:hover {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3), 0 0 60px rgba(180, 74, 255, 0.15);
+  }
+}
+
+/* ── Radial Progress ──────────────────────────────────────────── */
+.radial-progress-ring {
+  transform: rotate(-90deg);
+}
+
+/* ── Text Heatmap Highlight ───────────────────────────────────── */
+.heatmap-word {
+  display: inline-block;
+  padding: 1px 3px;
+  border-radius: 3px;
+  margin: 0 1px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+.heatmap-word:hover {
+  transform: scale(1.05);
+}
+.heatmap-word .tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  background: rgba(13, 13, 43, 0.95);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: var(--neon-blue);
+  z-index: 10;
+}
+.heatmap-word:hover .tooltip {
+  display: block;
+}
+
+/* ── Typing Cursor Animation ──────────────────────────────────── */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.typing-cursor::after {
+  content: '▊';
+  animation: blink 1s infinite;
+  color: var(--neon-blue);
+  margin-left: 2px;
+}
+
+/* ── Waveform ─────────────────────────────────────────────────── */
+.waveform-bar {
+  @apply rounded-full;
+  animation: wave 1.5s ease-in-out infinite;
+}
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
